@@ -10,9 +10,12 @@ object Main {
   def main(args: Array[String]): Unit = {
     val host = "localhost"
     val port = 8080
+    // creates actor system
     val actorSys = ActorSystem.create("MyActorSys")
+    // create tcp actor tells actor to start connection
     val tcpActor = actorSys.actorOf(Client.props(host, port), "client")
+    // suspends the current thread
     Thread.sleep(1000)
-    tcpActor ! ("command", "topic")
+    tcpActor ! ("connect", "md")
   }
 }
