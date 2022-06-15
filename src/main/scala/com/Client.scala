@@ -64,7 +64,20 @@ class Client(remote: InetSocketAddress) extends Actor{
           println(w.failureMessage.toString)
 
         case Received(data) =>
+          val tuples = Seq(("command", "Ack"), ("topic", ""))
+          // prepares object MBCommand to be transformed in JSON (beacause JSON parser can't transform simple object to JSON)
+          implicit val commandWrites = new Writes[MBCommand] {
+            def writes(mbCommand: MBCommand) = Json.obj(
+                "command"  -> mbCommand.command,
+                "topic" -> mbCommand.topic
+                )
+            }
+        // transforms MBCommand to JSON
+          val commandObject = new MBCommand("Ack", "")
+          val json = Json.toJson(commandObject)
           println("Received response: " + data.utf8String)
+
+          connection ! Write(ByteString(Json.stringify(json)))
 
         case "close" =>
           println("Closing connection")

@@ -16,11 +16,11 @@ object Main {
     val tcpActor = actorSys.actorOf(Client.props(host, port), "client")
     // suspends the current thread
     Thread.sleep(1000)
-    tcpActor ! ("connect", "md")
+    tcpActor ! ("connect", "")
     Thread.sleep(1000)
     tcpActor ! ("subscribe", "de")
     Thread.sleep(1000)
-    tcpActor ! ("subscribe", "en")
+    // tcpActor ! ("subscribe", "en")
     Thread.sleep(3000)
     tcpActor ! ("unsubscribe", "de")
   }
