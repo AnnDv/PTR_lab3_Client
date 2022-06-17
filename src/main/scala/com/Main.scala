@@ -20,7 +20,7 @@ object Main {
     Thread.sleep(1000)
     tcpActor ! ("subscribe", "de")
     Thread.sleep(1000)
-    tcpActor ! ("subscribe", "en")
+    tcpActor ! ("subscribe", "ru")
     Thread.sleep(3000)
     tcpActor ! ("unsubscribe", "de")
   }

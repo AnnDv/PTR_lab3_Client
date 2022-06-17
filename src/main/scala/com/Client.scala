@@ -76,6 +76,8 @@ class Client(remote: InetSocketAddress) extends Actor{
           val commandObject = new MBCommand("Ack", "")
           val json = Json.toJson(commandObject)
           println("Received response: " + data.utf8String)
+          
+          Thread.sleep(1000)
 
           connection ! Write(ByteString(Json.stringify(json)))
 
