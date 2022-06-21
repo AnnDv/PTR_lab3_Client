@@ -8,7 +8,8 @@ import com.Client
 
 object Main {
   def main(args: Array[String]): Unit = {
-    val host = "localhost"
+    // val host = "localhost"
+    val host = "server" // docker
     val port = 8080
     // creates actor system
     val actorSys = ActorSystem.create("MyActorSys")
